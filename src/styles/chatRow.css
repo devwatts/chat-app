@@ -1,0 +1,44 @@
+.chat-row{
+    width: 90%;
+    display: flex;
+    background-color: white;
+    height: 80px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.chat-row:hover{
+    background-color: rgb(230, 230, 230);
+    border-radius: 30px;
+}
+.chat-row-image{
+    width: 19%;
+}
+.chat-row-image img{
+height: 50px;
+width: 50px;
+border-radius: 100%;
+}
+.chat-row-text{
+    display: flex;
+    flex-direction: column;
+    width: 58%;
+}
+.person-name{
+    font-size: 16px;
+    font-weight:600;
+
+}
+.person-latest-chat{
+    font-size: 13px;
+    color: gray;
+}
+.chat-time{
+    width: 19%;
+    font-size: 12px;
+    padding-bottom: 19px;
+    text-align: right;
+}

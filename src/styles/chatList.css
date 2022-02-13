@@ -1,0 +1,8 @@
+.chat-list{
+    width: 25%;
+    margin: 30px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 10px;
+    height: fit-content;
+}
