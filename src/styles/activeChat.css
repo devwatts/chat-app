@@ -1,8 +1,18 @@
 .active-chat-parent{
     margin: 30px;
+    margin-left: 10px;
     background-color: white;
     border-radius: 30px;
     padding: 10px;
-    min-height: 90vh;
+    height: 90vh;
     width: 65%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+}
+.bubble-input-container{
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    justify-content: space-between;
 }

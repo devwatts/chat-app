@@ -1,0 +1,35 @@
+.chat-input-parent{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-self: baseline;
+}
+.textarea-parent{
+    width: 95%;
+    padding: 5px;
+    height: fit-content;
+    margin-top: 5px;
+}
+.textarea-parent textarea{
+max-height: 70px;
+resize: none;
+width: 100%;
+border-radius: 50px;
+border: 1px solid rgba(216, 216, 216, 0.788);
+outline: none;
+padding: 15px 0 0 25px ;
+font-family: 'Open Sans', sans-serif;
+max-height: 100px;
+}
+.send-btn-parent button{
+border: none;
+background-color: rgb(108, 108, 255);
+padding: 3px;
+height: 50px;
+width: 53px;
+cursor: pointer;
+border-radius: 50%;
+}
+.send-btn-parent button svg{
+    fill: white;
+    }

@@ -1,0 +1,30 @@
+.message-sender {
+    width: 100%;
+}
+
+.message-sender div {
+    border-radius: 0 20px 20px 20px;
+    background-color: rgb(243, 243, 243);
+    width: fit-content;
+    max-width: 40%;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 10px;
+    margin: 2px 0 2px 0;
+}
+
+.message-reciever {
+    width: 100%;
+}
+
+.message-reciever div{
+    border-radius: 20px 0px 20px 20px;
+    max-width: 40%;
+    margin: 2px 0 2px auto;
+    background-color: rgb(108, 108, 255);
+    width: fit-content;
+    font-size: 15px;
+    font-weight: 400;
+    color: white;
+    padding: 10px;
+}
