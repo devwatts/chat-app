@@ -10,12 +10,14 @@ export default class ActiveChatMessages extends Component{
             loading:false
         }
     }
-    handleScroll = (event) =>{
-        console.log(event.target.scrollHeight)
-        console.log(event.target.scrollTop)
-        console.log(event.target.clientHeight)
+    handleScroll = (event) => {
+        console.log(Math.abs(parseInt(event.target.scrollTop)))
         console.log(event.target.scrollHeight - event.target.clientHeight)
-        console.log( event.target.scrollTop/ event.target.scrollHeight - event.target.clientHeight)
+        if((event.target.scrollHeight - event.target.clientHeight) === Math.abs(parseInt(event.target.scrollTop)) + 10){
+            this.setState({
+                loading:true
+            })
+        }
     }
 
     render(){
