@@ -10,6 +10,13 @@ export default class ActiveChatMessages extends Component{
             loading:false
         }
     }
+    handleScroll = (event) =>{
+        console.log(event.target.scrollHeight)
+        console.log(event.target.scrollTop)
+        console.log(event.target.clientHeight)
+        console.log(event.target.scrollHeight - event.target.clientHeight)
+        console.log( event.target.scrollTop/ event.target.scrollHeight - event.target.clientHeight)
+    }
 
     render(){
         var messages = [
@@ -56,7 +63,7 @@ export default class ActiveChatMessages extends Component{
 
         ]
         return(
-            <div className="parent-container-messages">
+            <div onScroll={this.handleScroll} className="parent-container-messages">
                 <MessageBubble messageData={messages} />
             </div>
         )

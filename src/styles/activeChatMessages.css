@@ -4,4 +4,24 @@
     max-height: 85%;
     overflow-y: scroll;
     padding-right: 10px;
+    flex-direction: column-reverse;
 }
+/* width */
+.parent-container-messages::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  .parent-container-messages::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  .parent-container-messages::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  .parent-container-messages::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
