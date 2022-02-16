@@ -7,66 +7,45 @@ export default class ActiveChatMessages extends Component{
         super(props)
 
         this.state = {
-            loading:false
+            loading:false,
+            index:0
         }
     }
+    messages = [];   
+    componentDidMount() {
+        document.title = `${this.state.loading}`;
+        this.getNewMessages();
+      }
+      componentDidUpdate() {
+        document.title = `${this.state.loading}`;
+      }
+
     handleScroll = (event) => {
-        console.log(Math.abs(parseInt(event.target.scrollTop)))
-        console.log(event.target.scrollHeight - event.target.clientHeight)
-        if((event.target.scrollHeight - event.target.clientHeight) === Math.abs(parseInt(event.target.scrollTop)) + 10){
+        if((event.target.scrollHeight - event.target.clientHeight) <= ((Math.abs(parseInt(event.target.scrollTop))) + 10)){
             this.setState({
                 loading:true
             })
+            if(this.state.loading !== true){
+                this.getNewMessages()
+            }
         }
     }
 
+    async getNewMessages(index){
+        var res = await fetch(`https://chat-app-watts.herokuapp.com/messages/1`);
+        var json = await res.json();
+        json.messages.map((data,index) => (
+            this.messages.push(data)
+        ))
+        this.setState({
+            loading:false,
+        })
+    }
     render(){
-        var messages = [
-            {
-                text:"t is a long established fact that a reader will be distracted by the readable content o",
-                sender:false
-            },
-            {
-                text:" opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, an",
-                sender:true
-            },
-            {
-                text:"sure there isn't anything embarrassing hidden in the middle of text. All the Lo",
-                sender:false
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:true
-            },
-            {
-                text:"Lorem ipsum dolor sit amet.., comes from a line i",
-                sender:false
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:true
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:true
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:false
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:true
-            },
-            {
-                text:"hueugh the cites of the word in classical literature, discovered the undoubtahue",
-                sender:false
-            },
-
-        ]
+        console.log(this.messages)
         return(
             <div onScroll={this.handleScroll} className="parent-container-messages">
-                <MessageBubble messageData={messages} />
+                <MessageBubble messageData={this.messages} />
             </div>
         )
     }
