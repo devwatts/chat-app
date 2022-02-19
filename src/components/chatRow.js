@@ -17,7 +17,7 @@ class ChatRow extends Component{
             this.props.userData.map((data,index) => (
                 <div onClick={() => this.sendClickedRow(data.user_id)} key={index} className={this.props.activeUser === data.user_id ? "chat-row active-chat-row":"chat-row"}>
                     <div className="chat-row-image">
-                         <img alt={data.name} src={data.profile} />
+                         <img alt={data.name} src={data.display_picture} />
                    </div>
                    <div className="chat-row-text">
                          <div className="person-name">{data.name}</div>

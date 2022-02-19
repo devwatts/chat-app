@@ -6,22 +6,45 @@ export default class DetailHeaderChat extends Component{
         super(props);
 
         this.state = {
-            status:0
+            status:0,
+            userID:this.props.userID,
+            loading:false
         }
+    }
+    userData = {};
+
+    async componentDidUpdate(){
+        if(this.state.userID !== this.props.userID){
+            this.setState({
+                loading:true,
+                userID:this.props.userID
+            })
+            if(this.state.loading !== true){
+                this.getUserDetails();
+            }
+        }
+    }
+    async getUserDetails(){
+            var res = await fetch(`https://chat-app-watts.herokuapp.com/userstatus/${this.props.userID}`);
+            var json = await res.json();  
+            this.userData = json;  
+        this.setState({
+            loading:false
+        })
     }
     render(){
         return(
             <div className="header-parent">
                 <div className="header-image">
-                    <img alt="profile" src="https://i.ibb.co/SXFP9wQ/pluming-Installation-dubai-uae.jpg" />
+                    <img alt="profile" src={this.userData.display_picture} />
                 </div>
                 <div className="header-details">
                     <div className="activeName">
-                        {this.props.userID}
+                        {this.userData.user_name}
                     </div>
                     <div className="person-status">
                         {
-                            this.state.status ? "online":"offline"
+                            this.userData.user_status ? "online":"offline"
                         }
                     </div>
                 </div>
