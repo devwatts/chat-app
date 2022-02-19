@@ -3,8 +3,8 @@ import '../styles/chatList.css';
 import ChatRow from "./chatRow";
 
 class ChatList extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             loading:false
         }
@@ -14,7 +14,11 @@ class ChatList extends Component{
     async componentDidMount(){
         this.getUserList();
     }
-    
+
+    async handleRowClick(val){
+        this.props.handleUser(val);
+    };
+
     async getUserList(){
         if(this.state.loading !== true){
             this.setState({
@@ -33,7 +37,7 @@ class ChatList extends Component{
     render(){
         return (
             <div className="chat-list">
-                <ChatRow userData={this.userData} ></ChatRow>
+                <ChatRow activeUser={this.props.activeUserID} clickHandler={this.handleRowClick.bind(this)} userData={this.userData} ></ChatRow>
             </div>
         )
     }

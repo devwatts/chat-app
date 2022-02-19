@@ -9,16 +9,22 @@ export default class ActiveChat extends Component{
         super(props);
 
         this.state = {
-            user:"Jasneet Singh" 
+            userID:this.props.activeUserID 
         }
     }
-
+    async componentDidUpdate(){
+        if(this.state.userID !== this.props.activeUserID){
+            this.setState({
+                userID:this.props.activeUserID
+            })
+        }
+    }
     render(){
         return (
             <div className="active-chat-parent">
-                <DetailHeaderChat user={this.state.user} />
+                <DetailHeaderChat userID={this.state.userID} />
                 <div className="bubble-input-container">
-                <ActiveChatMessages />
+                <ActiveChatMessages userID={this.state.userID} />
                 <ChatInput />
                 </div>
             </div>

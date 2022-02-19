@@ -18,7 +18,7 @@ export default class DetailHeaderChat extends Component{
                 </div>
                 <div className="header-details">
                     <div className="activeName">
-                        {this.props.user}
+                        {this.props.userID}
                     </div>
                     <div className="person-status">
                         {

@@ -8,7 +8,7 @@ export default class ActiveChatMessages extends Component{
 
         this.state = {
             loading:false,
-            user:"Jasneet",
+            userID:this.props.userID,
             index:0
         }
     }
@@ -26,7 +26,7 @@ export default class ActiveChatMessages extends Component{
                 loading:true
             })
             if(this.state.loading !== true){
-                this.getNewMessages()
+                this.getNewMessages();
             }
         }
     }

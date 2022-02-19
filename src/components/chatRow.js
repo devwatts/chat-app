@@ -9,11 +9,13 @@ class ChatRow extends Component{
             active: props.active
         }
     }
-    
+    sendClickedRow = (val) => {
+        this.props.clickHandler(val);
+    }
     render(){
         return (
             this.props.userData.map((data,index) => (
-                <div key={index} className="chat-row">
+                <div onClick={() => this.sendClickedRow(data.user_id)} key={index} className={this.props.activeUser === data.user_id ? "chat-row active-chat-row":"chat-row"}>
                     <div className="chat-row-image">
                          <img alt={data.name} src={data.profile} />
                    </div>
