@@ -9,7 +9,6 @@ export default class DetailHeaderChat extends Component{
             status:0
         }
     }
-
     render(){
         return(
             <div className="header-parent">

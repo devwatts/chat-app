@@ -32,7 +32,7 @@ export default class ActiveChatMessages extends Component{
     }
 
     async getNewMessages(index){
-        var res = await fetch(`https://chat-app-watts.herokuapp.com/messages/${this.state.user}/1`);
+        var res = await fetch(`https://chat-app-watts.herokuapp.com/messages/${this.state.userID}/1`);
         var json = await res.json();
         json.messages.map((data,index) => (
             this.messages.push(data)
