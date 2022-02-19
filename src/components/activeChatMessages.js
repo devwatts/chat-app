@@ -8,16 +8,16 @@ export default class ActiveChatMessages extends Component{
 
         this.state = {
             loading:false,
+            user:"Jasneet",
             index:0
         }
     }
     messages = [];   
     componentDidMount() {
-        document.title = `${this.state.loading}`;
         this.getNewMessages();
       }
       componentDidUpdate() {
-        document.title = `${this.state.loading}`;
+          
       }
 
     handleScroll = (event) => {
@@ -32,7 +32,7 @@ export default class ActiveChatMessages extends Component{
     }
 
     async getNewMessages(index){
-        var res = await fetch(`https://chat-app-watts.herokuapp.com/messages/1`);
+        var res = await fetch(`https://chat-app-watts.herokuapp.com/messages/${this.state.user}/1`);
         var json = await res.json();
         json.messages.map((data,index) => (
             this.messages.push(data)
@@ -42,7 +42,6 @@ export default class ActiveChatMessages extends Component{
         })
     }
     render(){
-        console.log(this.messages)
         return(
             <div onScroll={this.handleScroll} className="parent-container-messages">
                 <MessageBubble messageData={this.messages} />

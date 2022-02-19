@@ -3,30 +3,37 @@ import '../styles/chatList.css';
 import ChatRow from "./chatRow";
 
 class ChatList extends Component{
+    constructor(){
+        super();
+        this.state = {
+            loading:false
+        }
+    }
+    userData = [];
+
+    async componentDidMount(){
+        this.getUserList();
+    }
+    
+    async getUserList(){
+        if(this.state.loading !== true){
+            this.setState({
+                loading:true
+            })
+            var res = await fetch(`https://chat-app-watts.herokuapp.com/userlist/${1234}`);
+            var json = await res.json();
+            json.userList.map((data,index) => (
+                this.userData.push(data)
+            ));
+            this.setState({
+                loading:false
+            })
+        }
+    }
     render(){
-        const userData = [
-            {
-            name:"Dev",
-            time:"9:10",
-            profile:"https://i.ibb.co/SXFP9wQ/pluming-Installation-dubai-uae.jpg",
-            message:"Hello there!"
-            },
-            {
-            name:"Prerna",
-            time:"9:10",
-            profile:"https://i.ibb.co/SXFP9wQ/pluming-Installation-dubai-uae.jpg",
-            message:"Hello there!"
-            },
-            {
-            name:"Jasneet",
-            time:"9:10",
-            profile:"https://i.ibb.co/SXFP9wQ/pluming-Installation-dubai-uae.jpg",
-            message:"Hello there!"
-            }
-    ]
         return (
             <div className="chat-list">
-                <ChatRow userData={userData} ></ChatRow>
+                <ChatRow userData={this.userData} ></ChatRow>
             </div>
         )
     }

@@ -9,14 +9,14 @@ export default class ActiveChat extends Component{
         super(props);
 
         this.state = {
-
+            user:"Jasneet Singh" 
         }
     }
 
     render(){
         return (
             <div className="active-chat-parent">
-                <DetailHeaderChat />
+                <DetailHeaderChat user={this.state.user} />
                 <div className="bubble-input-container">
                 <ActiveChatMessages />
                 <ChatInput />
