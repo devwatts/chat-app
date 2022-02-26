@@ -9,13 +9,13 @@ export default class ActiveChat extends Component{
         super(props);
 
         this.state = {
-            userID:this.props.activeUserID 
+            userID:this.props.activeChatUserID 
         }
     }
     async componentDidUpdate(){
-        if(this.state.userID !== this.props.activeUserID){
+        if(this.state.userID !== this.props.activeChatUserID){
             this.setState({
-                userID:this.props.activeUserID
+                userID:this.props.activeChatUserID
             })
         }
     }

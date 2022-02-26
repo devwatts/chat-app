@@ -4,14 +4,14 @@ import { useState } from "react";
 import App from "./App";
 
 function ParentApp() {
-    const [username,setUsername] = useState("");
+    const [username,setUsername] = useState("devwatts");
     if(username === ""){
         return (
             <LoginPage usernameHandler={setUsername}></LoginPage>
           );
     }else{
         return (
-            <App></App>
+            <App loggedUser={username}></App>
         );
     }
     

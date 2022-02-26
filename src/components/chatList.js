@@ -37,7 +37,7 @@ class ChatList extends Component{
     render(){
         return (
             <div className="chat-list">
-                <ChatRow activeUser={this.props.activeUserID} clickHandler={this.handleRowClick.bind(this)} userData={this.userData} ></ChatRow>
+                <ChatRow activeUser={this.props.activeChatUserID} clickHandler={this.handleRowClick.bind(this)} userData={this.userData} ></ChatRow>
             </div>
         )
     }
