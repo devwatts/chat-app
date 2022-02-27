@@ -15,14 +15,14 @@ export default class LoginPage extends Component{
             this.updateLoggedUser(username)
         } */
         var loginStatus = await postData("login",{username:username,password:password},"POST");
-        if(loginStatus.status == true){
-            this.updateLoggedUser(username)
+        if(loginStatus.status === true){
+            this.updateLoggedUser(loginStatus.userData)
         }else{
             alert("Incorrect password/username")
         }
     }
-    updateLoggedUser = (username) => {
-        this.props.usernameHandler(username)
+    updateLoggedUser = (data) => {
+        this.props.dataHandler(data)
     }
     render(){
         return(

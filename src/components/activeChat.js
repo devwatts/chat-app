@@ -20,14 +20,22 @@ export default class ActiveChat extends Component{
         }
     }
     render(){
-        return (
-            <div className="active-chat-parent">
-                <DetailHeaderChat userID={this.state.userID} />
-                <div className="bubble-input-container">
-                <ActiveChatMessages userID={this.state.userID} />
-                <ChatInput />
+        if(this.state.userID === null){
+           return(
+                <div className="active-chat-parent">
+                     <img alt="start new conversation" src="https://putatoeapp.web.app/img/chat/startConvo.png"/>
                 </div>
-            </div>
-        )
+             )
+        }else{
+            return (
+                <div className="active-chat-parent">
+                    <DetailHeaderChat userID={this.state.userID} />
+                    <div className="bubble-input-container">
+                    <ActiveChatMessages userID={this.state.userID} />
+                    <ChatInput />
+                    </div>
+                </div>
+            )
+        }
     }
 }

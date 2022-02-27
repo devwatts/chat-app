@@ -12,8 +12,8 @@ function App(props) {
   
   return (
     <div className="parent-container">
-        <ChatList loggedUser={props.loggedUser} activeChatUserID={activeChatUserID} handleUser={updateActiveUser} />
-        <ActiveChat activeChatUserID={activeChatUserID}/>
+        <ChatList userList={props.loggedUser.chat_list} activeChatUserID={activeChatUserID} handleUser={updateActiveUser} />
+        <ActiveChat userList={props.loggedUser.chat_list} activeChatUserID={activeChatUserID}/>
     </div>
   );
 }
