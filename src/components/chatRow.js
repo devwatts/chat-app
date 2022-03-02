@@ -15,13 +15,13 @@ class ChatRow extends Component{
     render(){
         return (
             this.props.userData.map((data,index) => (
-                <div onClick={() => this.sendClickedRow(data.user_id)} key={index} className={this.props.activeUser === data.user_id ? "chat-row active-chat-row":"chat-row"}>
+                <div onClick={() => this.sendClickedRow(data.chatID)} key={index} className={this.props.activeUser === data.chatID ? "chat-row active-chat-row":"chat-row"}>
                     <div className="chat-row-image">
-                         <img alt={data.name} src={data.display_picture} />
+                         <img alt={data.participant_userDetails.full_name} src={data.participant_userDetails.profile_picture} />
                    </div>
                    <div className="chat-row-text">
-                         <div className="person-name">{data.name}</div>
-                         <div className="person-latest-chat">{data.message}</div>
+                         <div className="person-name">{data.participant_userDetails.full_name}</div>
+                         <div className="person-latest-chat">{data.lastMessage}</div>
                     </div>               
                     <div className="chat-time">
                             {data.time}

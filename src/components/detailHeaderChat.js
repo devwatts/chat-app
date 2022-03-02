@@ -7,44 +7,36 @@ export default class DetailHeaderChat extends Component{
 
         this.state = {
             status:0,
-            userID:this.props.userID,
+            activeChatID:this.props.activeChatID,
+            activeChatUserData:this.props.userDetails,
             loading:false
         }
     }
-    userData = {};
 
     async componentDidUpdate(){
-        if(this.state.userID !== this.props.userID){
+        if(this.state.activeChatUserData !== this.props.userDetails){
             this.setState({
-                loading:true,
-                userID:this.props.userID
-            })
-            if(this.state.loading !== true){
-                this.getUserDetails();
-            }
+                activeChatUserData:this.props.userDetails,
+                status:this.props.userDetails.status
+            });
         }
     }
-    async getUserDetails(){
-            var res = await fetch(`https://chat-app-watts.herokuapp.com/userstatus/${this.props.userID}`);
-            var json = await res.json();  
-            this.userData = json;  
-        this.setState({
-            loading:false
-        })
-    }
+
+
     render(){
+        console.log(this.state)
         return(
             <div className="header-parent">
                 <div className="header-image">
-                    <img alt="profile" src={this.userData.display_picture} />
+                    <img alt="profile" src={this.state.activeChatUserData.profile_picture} />
                 </div>
                 <div className="header-details">
                     <div className="activeName">
-                        {this.userData.user_name}
+                        {this.state.activeChatUserData.full_name}
                     </div>
                     <div className="person-status">
                         {
-                            this.userData.user_status ? "online":"offline"
+                            this.state.status ? "online":"offline"
                         }
                     </div>
                 </div>

@@ -4,16 +4,18 @@ import ActiveChat from './activeChat';
 import {useState} from "react";
 
 function App(props) {
-  const [activeChatUserID,setActiveUser] = useState(null)
-  console.log(props)
+  const [activeChatID,setActiveUser] = useState(null)
+
+
   function updateActiveUser(id){
+    console.log(id)
     setActiveUser(id)
   }
   
   return (
     <div className="parent-container">
-        <ChatList userList={props.loggedUser.chat_list} activeChatUserID={activeChatUserID} handleUser={updateActiveUser} />
-        <ActiveChat userList={props.loggedUser.chat_list} activeChatUserID={activeChatUserID}/>
+        <ChatList userList={props.loggedUser.chat_list} activeChatID={activeChatID} handleUser={updateActiveUser} />
+        <ActiveChat userList={props.loggedUser.chat_list} activeChatID={activeChatID}/>
     </div>
   );
 }
