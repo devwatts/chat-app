@@ -7,3 +7,17 @@
     padding: 10px;
     height: fit-content;
 }
+.sendNewMessageButton{
+border-radius: 100%;
+width: 30px;
+height: 30px;
+font-size: 18px;
+font-weight: bolder;
+border: none;
+cursor: pointer;
+margin-left: auto;
+display: block;
+margin-bottom: 5px;
+color: white;
+background-color: rgb(108, 108, 255);
+}

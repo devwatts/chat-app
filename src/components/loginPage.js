@@ -8,17 +8,19 @@ export default class LoginPage extends Component{
 
 
     }
-    async logUserIn(){
+    async createNewUser(){
+
+    }
+    async logUserIn(key){
+        if(key === undefined || key === "Enter"){
         var username = document.getElementById('username').value;
         var password = document.getElementById('password').value;
-        /*if(username === password){
-            this.updateLoggedUser(username)
-        } */
         var loginStatus = await postData("login",{username:username,password:password},"POST");
         if(loginStatus.status === true){
             this.updateLoggedUser(loginStatus.userData)
         }else{
             alert("Incorrect password/username")
+        }
         }
     }
     updateLoggedUser = (data) => {
@@ -28,9 +30,15 @@ export default class LoginPage extends Component{
         return(
             <div className="login-parent">
                 <div className="login-card">
-                    <input id="username" type="text"/>
-                    <input id="password" type="password"/>
+                    <p className="project-intro">Hello, This is devs chat, an opensource realtime chatting platform</p>
+                    <div className="input-container">
+                    <input placeholder="Enter your username" id="username" type="text"/>
+                    <input onKeyDown={(e) => this.logUserIn(e.key)} placeholder="Enter your password" id="password" type="password"/>
+                    </div>
+                    <div className="button-container">
                     <button onClick={() => this.logUserIn()}>LOGIN</button>
+                    <button onClick={() => this.createNewUser()}>New?</button>
+                    </div>
                 </div>
             </div>
         )

@@ -47,7 +47,7 @@ export default class ActiveChat extends Component{
                     <DetailHeaderChat userDetails={this.state.activeChatUserDetails} activeChatID={this.state.activeChatID} />
                     <div className="bubble-input-container">
                     <ActiveChatMessages activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
-                    <ChatInput />
+                    <ChatInput activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
                     </div>
                 </div>
             )

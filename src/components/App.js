@@ -8,10 +8,8 @@ function App(props) {
 
 
   function updateActiveUser(id){
-    console.log(id)
     setActiveUser(id)
   }
-  
   return (
     <div className="parent-container">
         <ChatList userList={props.loggedUser.chat_list} activeChatID={activeChatID} handleUser={updateActiveUser} />
