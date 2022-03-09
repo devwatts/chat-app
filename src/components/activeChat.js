@@ -38,7 +38,7 @@ export default class ActiveChat extends Component{
         if(this.state.activeChatID === null){
            return(
                 <div className="active-chat-parent">
-                     <img alt="start new conversation" src="https://putatoeapp.web.app/img/chat/startConvo.png"/>
+                     <img className="no-chat-img" alt="start new conversation" src="https://putatoeapp.web.app/img/chat/startConvo.png"/>
                 </div>
              )
         }else{

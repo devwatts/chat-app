@@ -9,7 +9,16 @@ export default class LoginPage extends Component{
 
     }
     async createNewUser(){
-
+        let username = prompt("Enter the username for new account");
+        let result = await postData('usernameavailability',{username:username},"POST");
+        let password = "";
+        if(result.status){
+            password = prompt("Enter your password");
+            let userCreationBoolean = await postData('createnewaccount',{username:username,password:password},'POST');
+            console.log(userCreationBoolean);
+        }else{
+            alert(result.error)
+        }
     }
     async logUserIn(key){
         if(key === undefined || key === "Enter"){

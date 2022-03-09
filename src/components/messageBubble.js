@@ -10,7 +10,6 @@ export default class MessageBubble extends Component{
         }
     }
     render(){
-        console.log(this)
         return(
             this.props.messageData.map((data,index) => (
                     <div key={index} className={this.state.activeUserID === data.sender_userID ? "message-sender":"message-reciever"}>

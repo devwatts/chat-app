@@ -16,3 +16,7 @@
     height: 90%;
     justify-content: space-between;
 }
+.no-chat-img{
+    max-height: 100%;
+    width: auto;
+}

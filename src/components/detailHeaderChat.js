@@ -24,7 +24,6 @@ export default class DetailHeaderChat extends Component{
 
 
     render(){
-        console.log(this.state)
         return(
             <div className="header-parent">
                 <div className="header-image">
