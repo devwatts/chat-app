@@ -8,11 +8,12 @@ const {postData} = require('../Api/apis')
 export default class ActiveChat extends Component{
     constructor(props){
         super(props);
-
+        
         this.state = {
             activeUserID:this.props.userList.user_id,
             activeChatID:this.props.activeChatID,
-            activeChatUserDetails:{}
+            activeChatUserDetails:{},
+            latestMessage:""
         }
     }
 
@@ -23,7 +24,12 @@ export default class ActiveChat extends Component{
             },this.sortActiveChat);
         }
     }
-
+    
+    setLatestMessage = (message) => {
+        this.setState({
+            latestMessage:message
+        })
+    }
     async sortActiveChat(){
         for(let i = 0;i < this.props.userList.chats.length ; i++){
             if(this.props.userList.chats[i].chatID === this.props.activeChatID){
@@ -35,6 +41,7 @@ export default class ActiveChat extends Component{
     }
 
     render(){
+        console.log(this.props)
         if(this.state.activeChatID === null){
            return(
                 <div className="active-chat-parent">
@@ -46,8 +53,8 @@ export default class ActiveChat extends Component{
                 <div className="active-chat-parent">
                     <DetailHeaderChat userDetails={this.state.activeChatUserDetails} activeChatID={this.state.activeChatID} />
                     <div className="bubble-input-container">
-                    <ActiveChatMessages activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
-                    <ChatInput activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
+                    <ActiveChatMessages newText={this.state.latestMessage} activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
+                    <ChatInput socket={this.props.socket} handleNewMessage={this.setLatestMessage} activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
                     </div>
                 </div>
             )

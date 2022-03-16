@@ -10,16 +10,35 @@ export default class ChatInput extends Component{
             loading:false
         }
     }
+    async addNewMessageInList(message){
+        this.props.handleNewMessage(message)
+    }
     async sendNewMessage(bool,event){
         var messageText = document.getElementById('text-message').value;
         if(bool === 1){
             if(event.key === "Enter" && event.shiftKey !== true){
-                await postData("sendmessage",{chatID:this.props.activeChatID,userID:this.props.activeUserID,messageText:messageText},"POST")
+                let result = await postData("sendmessage",{chatID:this.props.activeChatID,userID:this.props.activeUserID,messageText:messageText},"POST")
+                if(result.status === "true"){
+                    this.addNewMessageInList(result.message);
+                    this.props.socket.emit('sendmessage',{
+                        chatID:this.props.activeChatID,
+                        userID:this.props.activeUserID,
+                        message:messageText
+                    })
+                }
                 document.getElementById('text-message').value = "";
             }
         }else{
             if(document.getElementById('text-message').value !== ""){
-                await postData("sendmessage",{chatID:this.props.activeChatID,userID:this.props.activeUserID,messageText:messageText},"POST")
+                let result = await postData("sendmessage",{chatID:this.props.activeChatID,userID:this.props.activeUserID,messageText:messageText},"POST")
+                if(result.status === "true"){
+                    this.addNewMessageInList(result.message);
+                    this.props.socket.emit('sendmessage',{
+                        chatID:this.props.activeChatID,
+                        userID:this.props.activeUserID,
+                        message:messageText
+                    })
+                }
                 document.getElementById('text-message').value = "";
             }
         }

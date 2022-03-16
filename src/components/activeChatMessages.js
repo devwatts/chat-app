@@ -10,10 +10,12 @@ export default class ActiveChatMessages extends Component{
         this.state = {
             loading:false,
             activeChatID:this.props.activeChatID,
-            index:0
+            index:0,
+            newText:this.props.newText,
+            messages:[]
         }
     }
-    messages = [];   
+    
      componentDidMount() {
         if(this.state.activeChatID !== null){
             this.getNewMessages();
@@ -28,9 +30,14 @@ export default class ActiveChatMessages extends Component{
                   document.getElementById('active-chat-messages').innerHTML = "";
                 this.getNewMessages();
               })
-              
-
           }
+          if(this.state.newText !== this.props.newText){
+              var messagesNewArray = [this.props.newText].concat(this.state.messages);
+              this.setState({
+                  newText:this.props.newText,
+                  messages:messagesNewArray
+              })
+          } 
       }
 
     handleScroll = (event) => {
@@ -47,15 +54,16 @@ export default class ActiveChatMessages extends Component{
     }
 
     async getNewMessages(){
-
+        var messages = [];
         var json = await postData('chatdata',{chatID:this.state.activeChatID,index:this.state.index},"POST");
         if(json.data.messages !== null && json.data.newIndex !== -1){
             json.data.messages.map((data,index) => (
-                this.messages.push(data)
+                messages.push(data)
             )) 
             this.setState({
                 index:json.data.newIndex,
                 loading:false,
+                messages:this.state.messages.concat(messages)
             })
         }else{
             this.setState({
@@ -67,7 +75,7 @@ export default class ActiveChatMessages extends Component{
     render(){
         return(
             <div onScroll={this.handleScroll} id="active-chat-messages" className="parent-container-messages">
-                <MessageBubble activeUserID={this.props.activeUserID} messageData={this.messages} />
+                <MessageBubble activeUserID={this.props.activeUserID} messageData={this.state.messages} />
             </div>
         )
     }
