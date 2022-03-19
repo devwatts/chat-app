@@ -10,8 +10,9 @@ export default class ChatInput extends Component{
             loading:false
         }
     }
-    async addNewMessageInList(message){
-        this.props.handleNewMessage(message)
+    async addNewMessageInList(message, chatID){
+        this.props.handleNewMessage2({message:message,chatID:chatID})
+        this.props.handleNewMessage(message,chatID)
     }
     async sendNewMessage(bool,event){
         var messageText = document.getElementById('text-message').value;
@@ -19,10 +20,11 @@ export default class ChatInput extends Component{
             if(event.key === "Enter" && event.shiftKey !== true){
                 let result = await postData("sendmessage",{chatID:this.props.activeChatID,userID:this.props.activeUserID,messageText:messageText},"POST")
                 if(result.status === "true"){
-                    this.addNewMessageInList(result.message);
+                    this.addNewMessageInList(result.message,result.chatID);
                     this.props.socket.emit('sendmessage',{
                         chatID:this.props.activeChatID,
                         userID:this.props.activeUserID,
+                        reciever_user_id:this.props.activeChatParticipant,
                         message:messageText
                     })
                 }

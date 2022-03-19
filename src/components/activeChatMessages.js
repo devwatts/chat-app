@@ -25,14 +25,17 @@ export default class ActiveChatMessages extends Component{
           if(this.state.activeChatID !== this.props.activeChatID){
               this.setState({
                 activeChatID:this.props.activeChatID,
-                index:0
+                index:0,
+                messages:[]
               },() => {
                   document.getElementById('active-chat-messages').innerHTML = "";
                 this.getNewMessages();
               })
           }
           if(this.state.newText !== this.props.newText){
+              //console.log(this.props)
               var messagesNewArray = [this.props.newText].concat(this.state.messages);
+              console.log(messagesNewArray)
               this.setState({
                   newText:this.props.newText,
                   messages:messagesNewArray

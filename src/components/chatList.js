@@ -7,7 +7,8 @@ class ChatList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            loading:false
+            loading:false,
+            activeChats:this.props.userList.chats
         }
     }
 
@@ -16,7 +17,6 @@ class ChatList extends Component{
     }
         
     async sendMessageToNewUser(){
-        console.log(this.props)
         var username = prompt("Enter the username");
         if(username !== null && username !== undefined && username !== ""){
             let usernameExistance = await postData('validateusername',{username:username,loggedUser:this.props.userList.user_id},"POST");
@@ -28,6 +28,9 @@ class ChatList extends Component{
                     if(response.status === false){
                         alert(response.error);
                     }
+                    this.setState({
+                        activeChats:response.data.chats
+                    })
                 }
             }else{
                 alert(usernameExistance.error);
@@ -35,17 +38,18 @@ class ChatList extends Component{
         }
     }
 
-    async handleRowClick(val){
-        this.props.handleUser(val);
+    async handleRowClick(val,val2){
+        this.props.handleUser(val,val2);
     };
 
     render(){
+        //console.log(this.props)
         return (
             <div className="chat-list">
                 <div>
                     <button onClick={() => this.sendMessageToNewUser()} className="sendNewMessageButton">+</button>
                 </div>
-                <ChatRow activeUser={this.props.activeChatID} clickHandler={this.handleRowClick.bind(this)} userData={this.props.userList.chats} ></ChatRow>
+                <ChatRow latestMessage={this.props.latestMessage} activeUser={this.props.activeChatID} clickHandler={this.handleRowClick.bind(this)} userData={this.state.activeChats} ></ChatRow>
             </div>
         )
     }

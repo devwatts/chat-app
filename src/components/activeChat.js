@@ -8,7 +8,6 @@ const {postData} = require('../Api/apis')
 export default class ActiveChat extends Component{
     constructor(props){
         super(props);
-        
         this.state = {
             activeUserID:this.props.userList.user_id,
             activeChatID:this.props.activeChatID,
@@ -16,8 +15,18 @@ export default class ActiveChat extends Component{
             latestMessage:""
         }
     }
-
+    booleanSocket = 0;
+    async componentDidMount(){
+            
+    }
     async componentDidUpdate(){
+        if(this.booleanSocket === 0 && Object.keys(this.props.socket).length !== 0){
+            this.booleanSocket = 1;
+            this.props.socket.on('newmessage',(data) => {
+                //this.props.latestMessageHandler(data);
+                this.setLatestMessage(data.message);
+            })
+        }
         if(this.state.activeChatID !== this.props.activeChatID){
             this.setState({
                 activeChatID:this.props.activeChatID
@@ -25,7 +34,9 @@ export default class ActiveChat extends Component{
         }
     }
     
-    setLatestMessage = (message) => {
+    setLatestMessage = (message, chatID) => {
+        //console.log(message, chatID)
+        console.log(message)
         this.setState({
             latestMessage:message
         })
@@ -41,7 +52,6 @@ export default class ActiveChat extends Component{
     }
 
     render(){
-        console.log(this.props)
         if(this.state.activeChatID === null){
            return(
                 <div className="active-chat-parent">
@@ -54,7 +64,7 @@ export default class ActiveChat extends Component{
                     <DetailHeaderChat userDetails={this.state.activeChatUserDetails} activeChatID={this.state.activeChatID} />
                     <div className="bubble-input-container">
                     <ActiveChatMessages newText={this.state.latestMessage} activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
-                    <ChatInput socket={this.props.socket} handleNewMessage={this.setLatestMessage} activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
+                    <ChatInput activeChatParticipant={this.props.activeChatParticipant} socket={this.props.socket} handleNewMessage={this.setLatestMessage} handleNewMessage2={this.props.latestMessageHandler} activeUserID={this.state.activeUserID} activeChatID={this.state.activeChatID} />
                     </div>
                 </div>
             )
